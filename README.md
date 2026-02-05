@@ -78,7 +78,9 @@
 
 <p align="center">
   <strong>Surah An-Najm (53:48)</strong><br/>
+
   وَأَنَّهُۥ هُوَ أَغْنَىٰ وَأَقْنَىٰ<br/>
+  
   <em>And that it is He who enriches and suffices.</em>
 </p>
 
