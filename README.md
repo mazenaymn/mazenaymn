@@ -74,10 +74,12 @@
 
 ---
 
-## 💡 Quote of the Day
+## 📖 Quran Ayah
 
 <p align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Random Dev Quote"/>
+  <strong>Surah An-Najm (53:48)</strong><br/>
+  وَأَنَّهُۥ هُوَ أَغْنَىٰ وَأَقْنَىٰ<br/>
+  <em>And that it is He who enriches and suffices.</em>
 </p>
 
 ---
