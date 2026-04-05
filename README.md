@@ -59,7 +59,11 @@
 ##  Contribution Graph
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mazenaymn&theme=tokyo-night&hide_border=true&area=true" alt="Contribution Graph"/>
+  <img src="https://raw.githubusercontent.com/mazenaymn/mazenaymn/output/contribution-graph.svg" alt="Contribution Graph"/>
+</p>
+
+<p align="center">
+  <em>This graph is generated in this repository from GitHub data, so it includes private contributions when the workflow token can read them.</em>
 </p>
 
 ---

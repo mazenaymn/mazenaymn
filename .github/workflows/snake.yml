@@ -1,9 +1,9 @@
 name: Generate Snake
 
 on:
-  # Run automatically every 24 hours
+  # Run automatically every 12 hours
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 */12 * * *"
   
   # Allows manual triggering
   workflow_dispatch:
@@ -21,11 +21,21 @@ jobs:
     timeout-minutes: 10
     
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate contribution graph
+        env:
+          GITHUB_TOKEN: ${{ secrets.SNK_GITHUB_TOKEN || github.token }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: python3 .github/scripts/generate_activity_graph.py
+
       # Generate the snake animation
       - name: Generate github-contribution-grid-snake.svg
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.SNK_GITHUB_TOKEN || github.token }}
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
