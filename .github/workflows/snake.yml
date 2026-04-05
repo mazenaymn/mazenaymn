@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate contribution graph
         env:
-          GITHUB_TOKEN: ${{ secrets.SNK_GITHUB_TOKEN || github.token }}
+          GITHUB_TOKEN: ${{ secrets.SNK_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: python3 .github/scripts/generate_activity_graph.py
 
@@ -35,7 +35,7 @@ jobs:
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          github_token: ${{ secrets.SNK_GITHUB_TOKEN || github.token }}
+          github_token: ${{ secrets.SNK_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark

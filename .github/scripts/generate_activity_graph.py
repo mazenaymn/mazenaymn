@@ -44,7 +44,17 @@ def graphql_request(query: str, variables: dict[str, str]) -> dict:
         with urllib.request.urlopen(request, timeout=30) as response:
             body = response.read().decode("utf-8")
     except urllib.error.HTTPError as error:
-        raise RuntimeError(f"GitHub API request failed with status {error.code}") from error
+        error_body = ""
+        try:
+            error_body = error.read().decode("utf-8")
+        except Exception:
+            error_body = ""
+        if error.code == 401:
+            raise RuntimeError(
+                "GitHub API request failed with status 401 (unauthorized). "
+                "Check that SNK_GITHUB_TOKEN is a valid personal access token and not expired."
+            ) from error
+        raise RuntimeError(f"GitHub API request failed with status {error.code}: {error_body}") from error
 
     data = json.loads(body)
     if data.get("errors"):
@@ -60,8 +70,8 @@ def fetch_contribution_days() -> list[dict[str, object]]:
     to_date = dt.datetime.combine(today + dt.timedelta(days=1), dt.time.min, tzinfo=dt.timezone.utc)
 
     query = """
-    query($from: DateTime!, $to: DateTime!) {
-      viewer {
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
         contributionsCollection(from: $from, to: $to) {
           contributionCalendar {
             weeks {
@@ -76,8 +86,15 @@ def fetch_contribution_days() -> list[dict[str, object]]:
     }
     """
 
-    data = graphql_request(query, {"from": iso_utc(from_date), "to": iso_utc(to_date)})
-    weeks = data["viewer"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+    data = graphql_request(
+        query,
+        {"login": USERNAME, "from": iso_utc(from_date), "to": iso_utc(to_date)},
+    )
+    user = data.get("user")
+    if not user:
+        raise RuntimeError(f"Could not load GitHub user data for '{USERNAME}'")
+
+    weeks = user["contributionsCollection"]["contributionCalendar"]["weeks"]
 
     days: list[dict[str, object]] = []
     for week in weeks:
