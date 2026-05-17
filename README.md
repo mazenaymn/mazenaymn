@@ -4,6 +4,7 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=2E97F7&center=true&vCenter=true&width=600&lines=AI+Engineering+Graduate;Machine+Learning+Enthusiast;Deep+Learning+Developer;Problem+Solver+%26+Innovator)](https://git.io/typing-svg)
 
+### https://mazenaymn.me/
 ### 🎓 Fresh Artificial Intelligence Engineering Graduate from Mansoura University
 ### 💼 Currently working at 187N.ai
 
